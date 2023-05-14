@@ -1,0 +1,24 @@
+{
+  "name": "reddit-clone",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Elias",
+  "type": "module",
+  "scripts": {
+    "start": "yarn tailwind && node index.js",
+    "dev": "nodemon index.js",
+    "tailwind": "npx tailwindcss -i ./css/styles.css -o ./dist/output.css",
+    "tailwind:dev": "npx tailwindcss -i ./css/styles.css -o ./dist/output.css --watch"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.18.2",
+    "handlebars": "^4.7.7",
+    "morgan": "^1.10.0",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  }
+}
