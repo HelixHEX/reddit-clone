@@ -15,7 +15,7 @@ const postsController = require("./controllers/posts.js");
 const subredditController = require("./controllers/subreddit.js");
 const commentsController = require("./controllers/comments.js");
 const authController = require("./controllers/auth.js");
-
+const repliesController = require("./controllers/replies.js");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -57,6 +57,7 @@ app.use("/posts", postsController);
 app.use("/n", subredditController);
 app.use("/posts", commentsController);
 app.use("/", authController);
+app.use('/posts', repliesController);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server started on port ${PORT}`);

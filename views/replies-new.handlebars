@@ -1,0 +1,26 @@
+<div class="p-10">
+  <div class="mt-4">
+    <p class="font-bold">
+      <span class="font-bold">By:</span>{{comment.author.username}}</p>
+
+    <p class="font-mediun text-primary">{{comment.content}}</p>
+  </div>
+
+  <form action="/posts/{{post._id}}/comments" method="post">
+    <div class="form-control w-full h-32">
+      <div class="mt-2">
+        <label class="label">
+          <span class="label-text text-gray-700 font-medium">Comment</span>
+        </label>
+        <textarea
+          name="content"
+          class="textarea textarea-bordered w-full"
+          placeholder="Comment on the post"
+        ></textarea>
+      </div>
+      <button
+        class="w-36 self-end btn bg-primary border-primary hover:bg-red-600 hover:border-red-600 mt-4"
+      >Add Comment</button>
+    </div>
+  </form>
+</div>

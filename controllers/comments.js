@@ -6,17 +6,19 @@ const router = express.Router();
 
 router.post("/:postId/comments", async (req, res) => {
   try {
-    const comment = new Comment(req.body);
+    const comment = await new Comment(req.body);
     comment.author = req.user._id;
-    await comment
+    comment
       .save()
-      .then(() => Post.findById(req.params.postId))
-      .then((post) => {
+      .then(() => Promise.all([Post.findById(req.params.postId)]))
+      .then(([post]) => {
         post.comments.unshift(comment);
-        return post.save();
+        return Promise.all([post.save()]);
       })
-      .then(() => res.redirect("/"))
-      .catch((err) => console.log(err.message));
+      .then(() => res.redirect(`/posts/${req.params.postId}`))
+      .catch((err) => {
+        console.log(err);
+      });
   } catch (e) {
     console.log(e.message);
   }

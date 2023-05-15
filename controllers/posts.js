@@ -34,8 +34,8 @@ router.get("/:id", async (req, res) => {
   try {    
     const currentUser = req.user;
     await Post.findById(req.params.id)
-      .lean()
       .populate(['comments', 'author'])
+      .lean()
       .then((post) => {
         res.render("posts-show", { post, currentUser });
       })
