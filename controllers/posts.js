@@ -10,7 +10,9 @@ router.post("/new", async (req, res) => {
       const post = await new Post(req.body);
       const userId = req.user._id;
       post.author = userId;
-
+      post.upVotes = [];
+      post.downVotes = [];
+      post.voteScore = 0;
       await post
         .save()
         .then(() => User.findById(userId))
@@ -47,5 +49,28 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.put('/:id/vote-up', (req, res) => {
+  Post.findById(req.params.id).then(post => {
+    post.upVotes.push(req.user._id);
+    post.voteScore += 1;
+    post.save();
+
+    return res.status(200);
+  }).catch(err => {
+    console.log(err);
+  })
+});
+
+router.put('/:id/vote-down', (req, res) => {
+  Post.findById(req.params.id).then(post => {
+    post.downVotes.push(req.user._id);
+    post.voteScore -= 1;
+    post.save();
+
+    return res.status(200);
+  }).catch(err => {
+    console.log(err);
+  });
+});
 
 module.exports = router;
