@@ -1,8 +1,13 @@
-import 'reflect-metadata';
-import 'dotenv-safe/config'
-import express from 'express';
-import expressHandleBars from 'express-handlebars';
-import morgan from 'morgan';
+import "reflect-metadata";
+import * as dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
+import { engine } from "express-handlebars";
+import morgan from "morgan";
+import db from './db/index.js'
+// Controllers
+import postsController from "./controllers/posts.js"; 
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -13,14 +18,21 @@ app.use(
   )
 );
 
-app.engine('handlebaars', expressHandleBars({defaultLayout: 'main'}))
-app.set('view engine', 'handlebars');
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.render('home')
-})
+app.use(express.static("public"))
+
+
+app.engine("handlebars", engine({ defaultLayout: "main", layoutsDir: `` }));
+app.set("view engine", "handlebars");
+
+app.get("/", (req, res) => {
+  res.render("home");
+});
+
+app.use('/posts', postsController)
 
 app.listen(PORT, () => {
   console.log(`🚀 Server started on port ${PORT}`);
-})
-
+});

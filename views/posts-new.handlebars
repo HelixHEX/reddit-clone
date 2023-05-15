@@ -1,0 +1,48 @@
+<div class="flex h-screen">
+  <form
+    action="/posts/new"
+    method="post"
+    class="m-auto drop-shadow-lg bg-white p-10 w-96"
+  >
+    <div>
+      <legend class="font-bold text-primary">New Post</legend>
+      <div class="form-control w-full max-w-xs">
+        <div class="mt-2">
+          <label class="label">
+            <span class="label-text text-gray-700 font-medium">Title</span>
+          </label>
+          <input
+            name="title"
+            type="text"
+            placeholder="Example title"
+            class="input input-bordered w-full max-w-xs"
+          />
+        </div>
+        <div class="mt-2">
+          <label class="label">
+            <span class="label-text text-gray-700 font-medium">Url</span>
+          </label>
+          <input
+            name="url"
+            type="text"
+            placeholder="https://example.com"
+            class="input input-bordered w-full max-w-xs"
+          />
+        </div>
+        <div class="mt-2">
+          <label class="label">
+            <span class="label-text text-gray-700 font-medium">Summary</span>
+          </label>
+          <textarea
+            name="summary"
+            class="textarea textarea-bordered w-full"
+            placeholder="Summary of the post"
+          ></textarea>
+        </div>
+        <button
+          class="w-36 self-end btn bg-primary border-primary hover:bg-red-600 hover:border-red-600 mt-4"
+        >Create Post</button>
+      </div>
+    </div>
+  </form>
+</div>

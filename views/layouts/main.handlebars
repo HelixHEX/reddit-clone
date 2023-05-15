@@ -1,13 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
+<html data-theme="light">
+  <head>
+    <meta charset="utf-8" />
     <title>Reddit</title>
-      <link href="/dist/output.css" rel="stylesheet">
-</head>
-<body>
+    <link href="/css/styles.css" rel="stylesheet" />
+  </head>
+  <body class="bg-white h-screen">
+    <div class="navbar bg-white drop-shadow-md fixed">
+      <div class="flex-none">
+        <p class="normal-case font-bold text-red-500 text-xl">Reddit</p>
+      </div>
+      <div class="flex-none gap-2">
+        <ul class="mx-5 menu-compact menu-vertical lg:menu-horizontal">
+          <li class="btn hover:bg-white hover:text-primary text-gray-400 bg-white border-none"><a href="/posts/new">New Post</a></li>
+        </ul>
+      </div>
+    </div>
 
     {{{body}}}
 
-</body>
+  </body>
 </html>

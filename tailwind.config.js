@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./**/*.{html,htm}"],
+  content: ["./views/**/*.handlebars"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "primary": "#ef4444",
+        "bg-primary": "#ef4444",
+      }
+    },
   },
-  plugins: [],
-}
+  plugins: [require("daisyui")],
+};
