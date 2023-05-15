@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/:postId/comments", async (req, res) => {
   try {
     const comment = new Comment(req.body);
+    comment.author = req.user._id;
     await comment
       .save()
       .then(() => Post.findById(req.params.postId))
