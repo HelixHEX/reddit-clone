@@ -1,29 +1,43 @@
 const express = require("express");
 const Post = require("../models/post.js");
+const User = require("../models/user.js");
 
 const router = express.Router();
 
 router.post("/new", async (req, res) => {
-  try {
-    const post = await new Post(req.body);
+  if (req.user) {
+    try {
+      const post = await new Post(req.body);
+      const userId = req.user._id;
+      post.author = userId;
 
-    await post.save().then(() => {
-      res.redirect("/");
-    });
-  } catch (e) {
-    console.log(e.message);
+      await post
+        .save()
+        .then(() => User.findById(userId))
+        .then((user) => {
+          user.posts.unshift(post);
+          user.save();
+
+          return res.redirect(`/posts/${post._id}`);
+        });
+    } catch (e) {
+      console.log(e.message);
+    }
+  } else {
+    return res.status(401);
   }
 });
 
 router.get("/new", (_req, res) => res.render("posts-new"));
 
 router.get("/:id", async (req, res) => {
-  try {
+  try {    
+    const currentUser = req.user;
     await Post.findById(req.params.id)
       .lean()
-      .populate("comments")
+      .populate(['comments', 'author'])
       .then((post) => {
-        res.render("posts-show", { post });
+        res.render("posts-show", { post, currentUser });
       })
       .catch((err) => {
         console.log(err.message);
@@ -33,19 +47,5 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get("/n/:subreddit", async (req, res) => {
-  try {
-    await Post.find({ subreddit: req.params.subreddit })
-      .lean()
-      .then((posts) => {
-        res.render("posts-index", { posts });
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  } catch (e) {
-    console.log(e.message);
-  }
-});
 
 module.exports = router;

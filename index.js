@@ -5,6 +5,8 @@ const { engine } = require("express-handlebars");
 const morgan = require("morgan");
 require('./db/index')
 const cookieParser = require("cookie-parser");
+const checkAuth = require('./middleware/checkAuth');
+
 // Models
 const Post = require("./models/post.js");
 
@@ -34,12 +36,17 @@ app.use(express.static("public"));
 app.engine("handlebars", engine({ defaultLayout: "main", layoutsDir: `` }));
 app.set("view engine", "handlebars");
 
+app.use(checkAuth);
+
 app.get("/", async (req, res) => {
   try {
+    const currentUser = req.user;
+
     await Post.find({})
       .lean()
+      .populate("author")
       .then((posts) => {
-        return res.render("posts-index", { posts });
+        return res.render("posts-index", { posts, currentUser });
       });
   } catch (e) {
     console.log(e.message);

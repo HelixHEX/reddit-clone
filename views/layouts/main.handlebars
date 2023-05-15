@@ -10,27 +10,37 @@
   </head>
   <body class="bg-white h-screen">
     <div class="navbar bg-white drop-shadow-md">
-      <div class="flex-none">
+      <div class="flex-1">
         <p class="normal-case font-bold text-red-500 text-xl"><a
             href="/"
           >Reddit</a></p>
       </div>
-      <div class="flex-1">
-        <a
-          class="btn hover:bg-white hover:text-primary text-gray-400 bg-white border-none"
-          href="/posts/new"
-        >New Post</a>
-      </div>
-      <div class="flex-2">
-        <a
-          class="btn hover:bg-white hover:text-primary text-gray-400 bg-white border-none"
-          href="/signup"
-        >Signup</a>
-        <a
-          class="btn hover:bg-white hover:text-primary text-gray-400 bg-white border-none"
-          href="/signin"
-        >Signin</a>
-      </div>
+
+      {{#if currentUser}}
+        <div class="flex-none">
+          <a
+            class="btn hover:bg-white hover:text-primary text-gray-400 bg-white border-none"
+            href="/posts/new"
+          >New Post</a>
+        </div>
+        <div class="flex-2">
+          <a
+            class="btn hover:bg-white hover:text-primary text-gray-400 bg-white border-none"
+            href="/logout"
+          >Logout</a>
+        </div>
+      {{else}}
+        <div class="flex-2">
+          <a
+            class="btn hover:bg-white hover:text-primary text-gray-400 bg-white border-none"
+            href="/signup"
+          >Signup</a>
+          <a
+            class="btn hover:bg-white hover:text-primary text-gray-400 bg-white border-none"
+            href="/signin"
+          >Signin</a>
+        </div>
+      {{/if}}
     </div>
 
     <div class="">

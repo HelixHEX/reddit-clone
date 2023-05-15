@@ -1,12 +1,13 @@
 <div class="py-20 flex h-screen w-screen">
 
   <div class="w-full p-20">
-    {{#each posts}}
-      <div class="card w-full h-64 bg-base-100 shadow-xl my-10">
-        <!-- Make a reddit still upvote and down vote UI with arrow icons -->
+    {{#if posts}}
+      {{#each posts}}
+        <div class="card w-full h-64 bg-base-100 shadow-xl my-10">
+          <!-- Make a reddit still upvote and down vote UI with arrow icons -->
 
-        <div class="card-body flex-row">
-          {{! <div class="my-1 flex flex-col items-center">
+          <div class="card-body flex-row">
+            {{! <div class="my-1 flex flex-col items-center">
             <div class="w-4 h-4 hover:cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -29,23 +30,34 @@
 
             </div>
           </div> }}
-          <div class="mx-10">
-            <h2 class="card-title hover:cursor-pointer hover:text-primary">
-              <a href="/posts/{{this._id}}">{{this.title}}</a>
-            </h2>
-            <a class="my-10 font-bold text-xs text-primary hover:cursor-pointer hover:text-red-600" href="/n/{{this.subreddit}}">n/{{this.subreddit}}</a>
-            <p class="flex-row my-5">
-              <span
-                class="my-4 font-bold font-sm text-gray-400 mr-1"
-              >URL:</span>
-              {{this.url}}
-            </p>
-            <p>{{this.summary}}</p>
+            <div class="mx-10 w-full">
+              <h2 class="card-title hover:cursor-pointer hover:text-primary">
+                <a href="/posts/{{this._id}}">{{this.title}}</a>
+              </h2>
+              <a
+                class="my-10 font-bold text-xs text-primary hover:cursor-pointer hover:text-red-600"
+                href="/n/{{this.subreddit}}"
+              >n/{{this.subreddit}}</a>
+              <p class="flex-row my-5">
+                <span
+                  class="my-4 font-bold font-sm text-gray-400 mr-1"
+                >URL:</span>
+                {{this.url}}
+              </p>
+              <p>{{this.summary}}</p>
+              <div class="divider w-full"></div>
+              <p class="font-medium">Posted by <span class="text-primary">{{this.author.username}}</span></p>
+            </div>
 
           </div>
-
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    {{else}}
+      <p class="text-gray-400">
+        No posts yet. Feel free to
+        <a href="/posts/new">create one</a>!
+      </p>
+    {{/if}}
   </div>
+
 </div>
