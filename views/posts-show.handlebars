@@ -1,4 +1,4 @@
-<div class="py-32 px-10 flex flex-col">
+<div class="py-32 px-10 flex flex-col h-full">
   <a
     href="/"
     class="text-primary hover:cursor-pointer w-4 font-semibold hover:text-red-600"
@@ -8,4 +8,34 @@
     class="hover:cursor-pointer w-auto hover:text-primary font-bold text-5xl my-4"
   >{{post.title}}</a>
   <p class="my-10">{{post.summary}}</p>
+  <div>
+    <a
+      href="{{post.url}}"
+      class="hover:cursor-pointer w-auto hover:text-primary font-bold text-5xl my-4"
+    >Comments</a>
+    <form action="/posts/{{post._id}}/comments" method="post">
+      <div class="form-control w-full h-32">
+        <div class="mt-2">
+          <label class="label">
+            <span class="label-text text-gray-700 font-medium">Comment</span>
+          </label>
+          <textarea
+            name="content"
+            class="textarea textarea-bordered w-full"
+            placeholder="Comment on the post"
+          ></textarea>
+        </div>
+        <button
+          class="w-36 self-end btn bg-primary border-primary hover:bg-red-600 hover:border-red-600 mt-4"
+        >Add Comment</button>
+      </div>
+    </form>
+    <div class="py-4">
+      {{#each post.comments}}
+        <div>
+          <p>{{this.content}}</p>
+        </div>
+      {{/each}}
+    </div>
+  </div>
 </div>

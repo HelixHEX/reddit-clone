@@ -21,6 +21,7 @@ router.get("/:id", async (req, res) => {
   try {
     await Post.findById(req.params.id)
       .lean()
+      .populate("comments")
       .then((post) => {
         res.render("posts-show", { post });
       })
