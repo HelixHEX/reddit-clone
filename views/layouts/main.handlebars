@@ -3,11 +3,12 @@
     <meta charset="utf-8" />
     <title>Reddit</title>
     <link href="/css/styles.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/fd02cabae2.js" crossorigin="anonymous"></script>
   </head>
   <body class="bg-white h-screen">
-    <div class="navbar bg-white drop-shadow-md fixed">
+    <div class="navbar bg-white drop-shadow-md absolute">
       <div class="flex-none">
-        <p class="normal-case font-bold text-red-500 text-xl">Reddit</p>
+        <p class="normal-case font-bold text-red-500 text-xl"><a href="/">Reddit</a></p>
       </div>
       <div class="flex-none gap-2">
         <ul class="mx-5 menu-compact menu-vertical lg:menu-horizontal">
@@ -16,7 +17,9 @@
       </div>
     </div>
 
-    {{{body}}}
+    <div class="">
+      {{{body}}}
+    </div>
 
   </body>
 </html>
