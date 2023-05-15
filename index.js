@@ -1,17 +1,14 @@
-import "reflect-metadata";
-import * as dotenv from "dotenv";
-dotenv.config();
-
-import express from "express";
-import { engine } from "express-handlebars";
-import morgan from "morgan";
-import db from "./db/index.js";
-
+require("reflect-metadata");
+require("dotenv-safe/config");
+const express = require("express");
+const { engine } = require("express-handlebars");
+const morgan = require("morgan");
+require('./db/index')
 // Models
-import Post from "./models/post.js";
+const Post = require("./models/post.js");
 
 // Controllers
-import postsController from "./controllers/posts.js";
+const postsController = require("./controllers/posts.js");
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -34,7 +31,9 @@ app.get("/", async (req, res) => {
   try {
     await Post.find({})
       .lean()
-      .then((posts) => res.render("posts-index", { posts }));
+      .then((posts) => {
+        return res.render("posts-index", { posts });
+      });
   } catch (e) {
     console.log(e.message);
   }
@@ -45,3 +44,5 @@ app.use("/posts", postsController);
 app.listen(PORT, () => {
   console.log(`🚀 Server started on port ${PORT}`);
 });
+
+module.exports = app;

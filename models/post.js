@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+const  {Schema, model} = require('mongoose');
 
 const postSchema = new Schema({
   title: {type: String, required: true},
@@ -6,4 +6,4 @@ const postSchema = new Schema({
   summary: {type: String, required: true},
 })
 
-export default model('Post', postSchema)
+module.exports = model('Post', postSchema)

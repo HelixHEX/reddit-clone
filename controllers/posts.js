@@ -1,5 +1,5 @@
-import express from "express";
-import Post from "../models/post.js";
+const express = require("express");
+const Post = require ("../models/post.js");
 
 const router = express.Router();
 
@@ -32,4 +32,4 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

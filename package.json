@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Elias",
-  "type": "module",
   "scripts": {
     "start": "yarn tailwind && node index.js",
     "dev": "nodemon index.js",
     "tailwind": "npx tailwindcss -i ./css/styles.css -o ./dist/output.css",
-    "tailwind:dev": "npx tailwindcss -i ./css/styles.css -o ./public/css/styles.css --watch"
+    "tailwind:dev": "npx tailwindcss -i ./css/styles.css -o ./public/css/styles.css --watch",
+    "test": "mocha --exit"
   },
   "license": "MIT",
   "dependencies": {
+    "cliui": "^8.0.1",
     "daisyui": "^2.51.6",
     "dotenv-safe": "^8.2.0",
     "express": "^4.18.2",
@@ -22,6 +23,9 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0",
     "tailwindcss": "^3.3.2"
   }
 }

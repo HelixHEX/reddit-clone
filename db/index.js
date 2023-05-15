@@ -1,6 +1,6 @@
 /* Mongoose Connection */
-import mongoose from "mongoose"
-import assert from 'assert'
+const mongoose = require("mongoose")
+const assert = require('assert')
 
 const url = 'mongodb://localhost/reddit-db';
 mongoose.connect(
@@ -18,4 +18,4 @@ mongoose.connect(
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'));
 mongoose.set('debug', true);
 
-export default mongoose.connection;
+module.exorts = mongoose.connection;
